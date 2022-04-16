@@ -1,0 +1,96 @@
+
+  .screen {
+    position: relative;
+    min-height: 50px;
+    border: 2px solid black;
+    background-color: white;
+  }
+
+  .screen::before {
+    position: absolute;
+    content: '';
+    inset: 0;
+    display: block;
+    opacity: 0.25;
+    background-image:  linear-gradient(135deg, var(--screenglare) 25%, transparent 25%), linear-gradient(225deg, var(--screenglare) 25%, transparent 25%), linear-gradient(45deg, var(--screenglare) 25%, transparent 25%), linear-gradient(315deg, var(--screenglare) 25%, var(--screenbg) 25%);
+    background-position:  10px 0, 10px 0, 0 0, 0 0;
+    background-size: 10px 10px;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+.screenFrame {
+    position: relative;
+    height: 60%;
+    margin: 5%;
+    border: 2px solid black;
+  }
+
+
+.mainDisplay {
+    position: absolute;
+    inset: 8% 5%;
+
+    .screenMain {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 80%;
+
+
+      > .screenLeft {
+
+        > .imgHolder {
+          position: relative;
+          height: 70%;
+          display: grid;
+          place-items: center;
+
+          &::before {
+            position: absolute;
+            content: '';
+            inset: 0;
+            display: block;
+            opacity: 0.1;
+            background-image: linear-gradient(var(--screenbggrid) 1px, transparent 1px), linear-gradient(90deg, var(--screenbggrid) 1px, white 1px);
+            background-size: 10px 10px, 10px 10px;
+            background-position: 1px 1px, 1px 1px;
+            z-index: 2;
+          }
+        }
+
+        #pokeImage {
+          height: 100%;
+          position: relative;
+          z-index: 3;
+          object-fit: contain;
+        }
+      }
+
+      > .screenRight {
+        background: red;
+      }
+    }
+
+    .screenBot {
+      display: flex;
+      align-items: center;
+      height: 20%;
+    }
+
+
+}
+
+
+.screenMain {
+  .screenLeft {
+    border-right: 1px solid black;
+    border-bottom: 2px solid black;
+  }
+
+  .screenRight {
+    border-left: 1px solid black;
+    border-bottom: 2px solid black;
+  }
+
+}

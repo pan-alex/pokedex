@@ -1,0 +1,34 @@
+
+button {
+    background-color: grey;
+    width: 45px;
+    border: 1px solid black;
+    /* opacity: 0.5; */
+  }
+
+  button:hover {
+    filter: brightness(150%);
+  }
+
+  button.circular {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  button.thin {
+    height: 20px;
+    border-radius: 5px;
+  }
+
+  button.blue {
+    background-color: cornflowerblue;
+  }
+
+  button.red {
+    background-color: darkred;
+  }
+
+  button.dpad {
+
+  }
