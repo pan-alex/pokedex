@@ -9,8 +9,7 @@
 		<title>Pokedex</title>
 
 		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="assets/css/main.css">
 	</head>
 	<body>
 		<div id="wrapper">
@@ -23,8 +22,33 @@
 					<div class="screenFrame">
 
 						<div class="screen mainDisplay">
-							<p id="pokeName">Name</p>
-							<p id="pokeId">id</p>
+							<div class="screenMain">
+
+								<div class="screenLeft">
+									<div class="imgHolder">
+										<img src="sprites/model/151.png" id="pokeImage">
+									</div>
+									<div>
+										<p id="pokeName">Name</p>
+										<p id="pokeId">id</p>
+									</div>
+								</div>
+
+								<div class="screenRight">
+									<div class="screenRightTop">
+										<p id="pokeInfo"></p>
+									</div>
+									<div class="screenRightBot">
+										<p id="pokeMoves"></p>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="screenBot">
+								<input type="text" id="query" placeholder="Tap to Search...">
+							</div>
+
 						</div>
 					</div>
 					<div class="buttonRow">
@@ -34,7 +58,6 @@
 								<button class="thin red" id="clearQuery"></button>
 								<button class="thin blue" id="submitQuery"></button>
 							</div>
-							<input type="text" id="query">
 							<!-- <div class="screen"></div> -->
 						</div>
 						<div class="dpad">
@@ -60,6 +83,6 @@
 
 
 
-		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
 	</body>
 </html>

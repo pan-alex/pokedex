@@ -1,0 +1,26 @@
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.searchContainer > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+#query {
+  font-family: 'Courier New', Courier, monospace;
+  display: block;
+  border: none;
+  border-radius: 5px;
+  height: 90%;
+
+  &:focus {
+    outline: none;
+    background: grey;
+  }
+  }
+
+

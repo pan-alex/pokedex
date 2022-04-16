@@ -1,0 +1,28 @@
+// Libs.
+@import 'libs/vars';
+
+@mixin color($p) {
+    @include color-typography($p);
+    @include color-box($p);
+    @include color-button($p);
+    @include color-form($p);
+    @include color-list($p);
+    @include color-table($p);
+    @include color-icon($p);
+}
+
+// Base.
+@import 'base/reset';
+@import 'base/page';
+@import 'base/typography';
+
+
+// Component.
+
+@import 'components/button';
+@import 'components/screen';
+@import 'components/search';
+
+// Layout.
+
+@import 'layout/wrapper';
