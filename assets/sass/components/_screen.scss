@@ -22,16 +22,17 @@
 
 .screenFrame {
     position: relative;
-    height: 79%;
-    margin: 5%;
+    height: 80%;
+    margin: 2.5%;
     border: 2px solid black;
     border-radius: 15px;
+    background: rgb(238, 238, 238);
   }
 
 
 .mainDisplay {
     position: absolute;
-    inset: 8% 5%;
+    inset: 5% 3%;
 
     .screenMain {
       display: grid;
@@ -41,7 +42,8 @@
 
       > .screenLeft {
         display: grid;
-        grid-template-rows: 0.7fr 0.3fr;
+        // max-height: 100%;
+        grid-template-rows: 1fr 0.3fr;
 
         > .imgHolder {
           position: relative;
@@ -67,7 +69,26 @@
           z-index: 3;
           object-fit: contain;
         }
+
+        .basicInfo {
+          height: 100%;
+        }
+        #pokeId {
+          padding-bottom: 10px;
+        }
+
+        .typeImgHolder {
+          flex-wrap: nowrap;
+        }
+
+        img.type {
+          position: relative;
+          height: 10vh;
+          max-height: 100%;
+        }
       }
+
+
 
       > .screenRight {
         display: grid;
@@ -85,6 +106,25 @@
       display: flex;
       align-items: center;
       height: 20%;
+      position: relative;
+
+
+      #query {
+        // position: absolute;
+        // top: 20%;
+        font-family: 'Courier New', Courier, monospace;
+        display: block;
+        border: none;
+        border-radius: 5px;
+        height: 90%;
+
+        &:focus {
+          outline: none;
+          background: rgba(128, 128, 128, 0.3);
+        }
+        }
+
+
     }
 
 
@@ -110,4 +150,11 @@
     }
   }
 
+}
+
+
+@media only screen and (max-width: 500px) and (orientation: portrait) {
+  .basicInfo {
+    flex-direction: column;
+  }
 }
