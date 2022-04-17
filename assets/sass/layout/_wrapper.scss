@@ -9,6 +9,12 @@
   }
 
 
+.flex-rl {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 2.5%;
+}
+
 .panel {
   display: flex;
   flex-direction: column;
@@ -17,11 +23,6 @@
   border-radius: 0;
   }
 
-  .buttonRow {
-    display: flex;
-    margin-inline: 2.5%;
-    justify-content: space-between;
-  }
 
   .buttonRow .screen {
     margin-top: 10px;
