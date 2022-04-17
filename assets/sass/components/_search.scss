@@ -10,17 +10,3 @@
   justify-content: space-between;
 }
 
-#query {
-  font-family: 'Courier New', Courier, monospace;
-  display: block;
-  border: none;
-  border-radius: 5px;
-  height: 90%;
-
-  &:focus {
-    outline: none;
-    background: rgba(128, 128, 128, 0.3);
-  }
-  }
-
-

@@ -2,6 +2,7 @@
 #wrapper {
     max-height: 100vh;
     height: var(--panelHeight);
+    min-height: var(--panelMinHeight);
     min-width: var(--panelMinWidth);
     width: 100%;
     max-width: var(--panelMaxWidth);
@@ -12,6 +13,7 @@
 .flex-rl {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-inline: 2.5%;
 }
 
