@@ -25,7 +25,7 @@ function updateDom(data) {
   // Update info
   query.value = ''
   pokeName.innerText = toCapitalCase(data.name)
-  pokeId.innerText = `ID: ${data.id}`
+  pokeId.innerText = `# ${('000'+data.id).slice(-4)}`
 
   return true
 }
