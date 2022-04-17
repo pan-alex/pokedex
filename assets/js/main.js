@@ -3,7 +3,7 @@ document.querySelector('#clearQuery').addEventListener('click', function() {quer
 
 
 function fetchPokemonData(){
-    const choice = query.value.trim().toLowerCase()
+    const choice = query.value.trim().replace(/ /g, '-').toLowerCase()
     const url = 'https://pokeapi.co/api/v2/pokemon/'+choice
 
     fetch(url)
@@ -34,9 +34,24 @@ function updateDom(data) {
 
 
     // Update info
-    query.value = ''
-    pokeName.innerText = toCapitalCase(data.name)
-    pokeId.innerText = `# ${('000'+data.id).slice(-4)}`
+    query.value = '';
+    pokeName.innerText = toCapitalCase(data.name);
+    pokeId.innerText = `# ${('000'+data.id).slice(-4)}`;
+    pokeHeight.innerText = +data.height / 10; //in metres
+    pokeWeight.innerText = +data.weight / 10; //in kg
+
+    [pokeStatHp, pokeStatAtk, pokeStatDef, pokeStatSpAtk, pokeStatSpDef, pokeStatSpeed].forEach( (item, i) => {
+      // console.log(i)
+      // console.log(data.stats[i].base_stat)
+      // console.log(['hp', 'atk', 'def', 'spAtk', 'spDef', 'spd'][i])
+      item.innerText = fillDots(+data.stats[i].base_stat, ['hp', 'atk', 'def', 'spAtk', 'spDef', 'spd'][i])
+    })
+    // pokeStatHp.innerText = fillDots(data.stats[0].base_stat, 'hp')
+    // pokeStatAtk.innerText = fillDots(data.stats[1].base_stat, 'atk')
+    // pokeStatDef.innerText = fillDots(data.stats[2].base_stat, 'def')
+    // pokeStatSpAtk.innerText = '●'.repeat(data.stats[3].base_stat*10 / maxStats.spAtk)
+    // pokeStatSpDef.innerText = '●'.repeat(data.stats[4].base_stat*10 / maxStats.spDef)
+    // pokeStatSpeed.innerText = '●'.repeat(data.stats[5].base_stat*10 / maxStats.spd)
 
 
     return true
@@ -53,9 +68,26 @@ function updateDom(data) {
 }
 
 
+function fillDots(value, stat) {
+maxStats = {
+  'hp': 255,
+  'atk': 180,
+  'def': 230,
+  'spAtk': 180,
+  'spDef': 230,
+  'spd': 180,
+}
+
+'◐'
+return ('●'.repeat(value*10 / maxStats[stat]) + '○○○○○○○○○○').slice(0, 10)
+}
+
+
+
 function toCapitalCase(word) {
     if (word) {
-    return word.replace('-', ' ')
+    return word.replace(/-/g, ' ')
                .replace(/\w\S*/g, w => w.replace(/^\w/, c => c.toUpperCase()))
     }
   }
+
