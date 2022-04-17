@@ -13,21 +13,43 @@ function fetchPokemonData(){
           updateDom(data)
         })
         .catch(err => {
-            console.log(`error ${err}`)
+          updateDom()
+          console.log(`error ${err}`)
         });
   }
 
 
 function updateDom(data) {
-  // Update image
-  +data.id <= 718 ? pokeImage.src = `sprites/model/${data.id}.png` : pokeImage.src = `sprites/model/0.png` //718 is the last Sprite that I have
 
-  // Update info
-  query.value = ''
-  pokeName.innerText = toCapitalCase(data.name)
-  pokeId.innerText = `# ${('000'+data.id).slice(-4)}`
+  if (data && data.name) {
+    // Update images
+    +data.id <= 718 ? pokeImage.src = `images/model/${data.id}.png` : pokeImage.src = `images/model/0.png` //718 is the last Sprite that I have
 
-  return true
+    pokeType1Image.src = `images/type-icons/${data.types[0].type.name}.webp`
+    if (data.types[1]?.type.name) {
+      pokeType2Image.src = `images/type-icons/${data.types[1].type.name}.webp`
+    } else {
+      pokeType2Image.src = ''
+    }
+
+
+    // Update info
+    query.value = ''
+    pokeName.innerText = toCapitalCase(data.name)
+    pokeId.innerText = `# ${('000'+data.id).slice(-4)}`
+
+
+    return true
+  } else {
+    // Erase image
+    pokeImage.src = `images/model/0.png`
+
+    // Display error text
+    pokeName.innerText = 'ERR UNKNOWN POKEMON'
+    pokeId.innerText = `# 0000`
+    return false
+  }
+
 }
 
 
