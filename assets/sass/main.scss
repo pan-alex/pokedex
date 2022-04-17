@@ -19,10 +19,11 @@
 
 // Component.
 
+@import 'components/screendisplay';
 @import 'components/button';
-@import 'components/screen';
 @import 'components/search';
 
 // Layout.
 
 @import 'layout/wrapper';
+@import 'layout/screen';
