@@ -1,0 +1,16 @@
+
+- API
+	- Stats display
+		- As numbers
+		- As bars
+
+	- Moves
+
+
+- Make screen contents responsive / fit on all screen sizes
+
+
+- Interface
+	- CSS D-pad
+		- Add interaction
+	- Make interface color look more 'real' with lighting effects / shadow
