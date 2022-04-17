@@ -151,9 +151,12 @@ button.red {
   grid-template-columns: 1fr 1fr;
   height: 80%;
 }
+.mainDisplay .screenMain > .screenLeft {
+  display: grid;
+  grid-template-rows: 0.7fr 0.3fr;
+}
 .mainDisplay .screenMain > .screenLeft > .imgHolder {
   position: relative;
-  height: 70%;
   display: grid;
   place-items: center;
 }
@@ -176,7 +179,8 @@ button.red {
      object-fit: contain;
 }
 .mainDisplay .screenMain > .screenRight {
-  background: red;
+  display: grid;
+  grid-template-rows: 0.4fr 0.6fr;
 }
 .mainDisplay .screenBot {
   display: flex;
@@ -188,9 +192,15 @@ button.red {
   border-right: 1px solid black;
   border-bottom: 2px solid black;
 }
+.screenMain .screenLeft .imgHolder {
+  border-bottom: 1px solid green;
+}
 .screenMain .screenRight {
   border-left: 1px solid black;
   border-bottom: 2px solid black;
+}
+.screenMain .screenRight .screenRightTop {
+  border-bottom: 1px solid blue;
 }
 
 .searchContainer {
@@ -213,7 +223,7 @@ button.red {
 }
 #query:focus {
   outline: none;
-  background: grey;
+  background: rgba(128, 128, 128, 0.3);
 }
 
 #wrapper {
