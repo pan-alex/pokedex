@@ -1,3 +1,9 @@
 body {
     font-family: 'Courier New', Courier, monospace;
 }
+
+@media (max-width: 500px) {
+    a, p {
+        font-size: 0.8rem;
+    }
+}
