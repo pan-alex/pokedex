@@ -21,11 +21,11 @@ function fetchPokemonData(){
 
 function updateDom(data) {
 
-  if (data && data.name) {
+  if (data && data.name) { // If valid query (successfully returns and object & that object is a pokemon [with a name])
     // Update images
     +data.id <= 718 ? pokeImage.src = `images/model/${data.id}.png` : pokeImage.src = `images/model/0.png` //718 is the last Sprite that I have
 
-    pokeType1Image.src = `images/type-icons/${data.types[0].type.name}.webp`
+    pokeType1Image.src = `images/type-icons/${data.types[0].type.name}.webp` // Update icons with pokemon type
     if (data.types[1]?.type.name) {
       pokeType2Image.src = `images/type-icons/${data.types[1].type.name}.webp`
     } else {
@@ -39,23 +39,12 @@ function updateDom(data) {
     pokeId.innerText = `# ${('000'+data.id).slice(-4)}`;
     pokeHeight.innerText = +data.height / 10; //in metres
     pokeWeight.innerText = +data.weight / 10; //in kg
-
     [pokeStatHp, pokeStatAtk, pokeStatDef, pokeStatSpAtk, pokeStatSpDef, pokeStatSpeed].forEach( (item, i) => {
-      // console.log(i)
-      // console.log(data.stats[i].base_stat)
-      // console.log(['hp', 'atk', 'def', 'spAtk', 'spDef', 'spd'][i])
       item.innerText = fillDots(+data.stats[i].base_stat, ['hp', 'atk', 'def', 'spAtk', 'spDef', 'spd'][i])
     })
-    // pokeStatHp.innerText = fillDots(data.stats[0].base_stat, 'hp')
-    // pokeStatAtk.innerText = fillDots(data.stats[1].base_stat, 'atk')
-    // pokeStatDef.innerText = fillDots(data.stats[2].base_stat, 'def')
-    // pokeStatSpAtk.innerText = '●'.repeat(data.stats[3].base_stat*10 / maxStats.spAtk)
-    // pokeStatSpDef.innerText = '●'.repeat(data.stats[4].base_stat*10 / maxStats.spDef)
-    // pokeStatSpeed.innerText = '●'.repeat(data.stats[5].base_stat*10 / maxStats.spd)
-
 
     return true
-  } else {
+  } else { // If invalid query
     // Erase image
     pokeImage.src = `images/model/0.png`
 
