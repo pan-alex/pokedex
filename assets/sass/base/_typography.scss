@@ -1,5 +1,11 @@
 body {
     font-family: 'Courier New', Courier, monospace;
+    color: var(--fontPrim)
+}
+
+input {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--fontPrim)
 }
 
 @media (max-width: 500px) {

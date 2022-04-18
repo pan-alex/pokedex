@@ -6,8 +6,10 @@
     --panelMaxWidth: 1100px;
 
     //Colours
+    --fontPrim: #c1c1c1;
     --pokered: rgb(232, 72, 72);
-    --screenbg: #7fffd4;
-    --screenbggrid: black;
-    --screenglare: rgba(122, 230, 192, 0.836);
+    --screenbg: #272727;
+    --screenbggrid: white;
+    // --screenglare: rgba(122, 230, 192, 0.836);
+    --screenglare: hsla(158.9, 69.5%, 25.7%, 0.84);
 }

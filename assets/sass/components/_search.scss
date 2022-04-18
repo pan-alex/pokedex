@@ -13,11 +13,12 @@
 #query {
   // position: absolute;
   // top: 20%;
-  font-family: 'Courier New', Courier, monospace;
   display: block;
   border: none;
   border-radius: 5px;
   height: 90%;
+  background: var(--screenbg);
+  filter: brightness(200%);
 
   &:focus {
     outline: none;

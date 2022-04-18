@@ -3,7 +3,7 @@
     position: relative;
     min-height: 50px;
     border: 2px solid black;
-    background-color: white;
+    background-color: var(--screenbg)
 }
 
 .screen::before {
@@ -12,7 +12,8 @@
     inset: 0;
     display: block;
     opacity: 0.25;
-    background-image:  linear-gradient(135deg, var(--screenglare) 25%, transparent 25%), linear-gradient(225deg, var(--screenglare) 25%, transparent 25%), linear-gradient(45deg, var(--screenglare) 25%, transparent 25%), linear-gradient(315deg, var(--screenglare) 25%, var(--screenbg) 25%);
+    // background-image:  linear-gradient(135deg, var(--screenglare) 25%, transparent 25%), linear-gradient(225deg, var(--screenglare) 25%, transparent 25%), linear-gradient(45deg, var(--screenglare) 25%, transparent 25%), linear-gradient(315deg, var(--screenglare) 25%, var(--screenbg) 25%);
+    background-image: linear-gradient(135deg, hsla(158.9, 67.7%, 25.5%, 0.84) 25%, rgba(39, 39, 39, 0) 25%), linear-gradient(225deg, hsla(158.9, 69.1%, 26.7%, 0.84) 25%, rgba(39, 39, 39, 0) 25%), linear-gradient(45deg, hsla(158.9, 69.5%, 25.7%, 0.84) 25%, rgba(39, 39, 39, 0) 25%), linear-gradient(315deg, hsla(158.9, 69.5%, 25.7%, 0.84) 25%, hsl(160, 98.4%, 25.1%) 25%);
     background-position:  10px 0, 10px 0, 0 0, 0 0;
     background-size: 10px 10px;
     background-repeat: repeat;
@@ -27,7 +28,7 @@
     inset: 0;
     display: block;
     opacity: 0.1;
-    background-image: linear-gradient(var(--screenbggrid) 1px, transparent 1px), linear-gradient(90deg, var(--screenbggrid) 1px, white 1px);
+    background-image: linear-gradient(var(--screenbggrid) 1px, transparent 1px), linear-gradient(90deg, var(--screenbggrid) 1px, var(--screenbg) 1px);
     background-size: 10px 10px, 10px 10px;
     background-position: 1px 1px, 1px 1px;
     z-index: 2;
@@ -56,6 +57,7 @@
     position: relative;
     height: 10vh;
     max-height: 62px;
+    filter: brightness(80%);
 
     + img {
     padding-left: 5px;
