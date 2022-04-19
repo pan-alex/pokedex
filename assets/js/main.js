@@ -1,22 +1,72 @@
 document.querySelector('#submitQuery').addEventListener('click', fetchPokemonData)
 document.querySelector('#clearQuery').addEventListener('click', function() {query.value = ''})
 
-
 function fetchPokemonData(){
-    const choice = query.value.trim().replace(/ /g, '-').toLowerCase()
-    const url = 'https://pokeapi.co/api/v2/pokemon/'+choice
+    const pokemonName = query.value.trim().replace(/ /g, '-').toLowerCase()
+    const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName
 
     fetch(url)
         .then(res => res.json()) // parse response as JSON
-        .then(data => {
-          console.log(data)
-          updateDom(data)
+        .then(pokemonData => {
+          fetchEvolution(pokemonData, pokemonName);
+          updateDom(pokemonData);
         })
         .catch(err => {
           updateDom()
           console.log(`error ${err}`)
         });
   }
+
+let evolvesTo = []
+let evolvesFrom // global variable; need to work out how to do this without a Global
+
+function fetchEvolution(pokemonData, pokemonName){
+  const urlSpecies = pokemonData.species.url;
+  fetch(urlSpecies)
+      .then(res => res.json()) // parse response as JSON
+      .then(speciesData => {
+        urlEvolution = speciesData.evolution_chain.url;
+        pokeEvolveFrom.innerText = toCapitalCase(speciesData.evolves_from_species?.name) ?? 'N/A'; //Update Dom within this function
+        fetchEvolutionChain(urlEvolution, pokemonName)
+      })
+      .catch(err => {
+        updateDom()
+        console.log(`error ${err}`)
+      });
+}
+
+
+function fetchEvolutionChain(urlEvolution, pokemonName){
+  fetch(urlEvolution)
+      .then(res => res.json()) // parse response as JSON
+      .then(evolutionData => {
+        evolvesTo = checkEvolutionChain(evolutionData, pokemonName) // overwrites global
+      });
+}
+
+
+function checkEvolutionChain(evolutionData, pokemonName) {
+  let evolvesTo = []
+  if(evolutionData.chain.species.name === pokemonName) { // If this is the tier-0 evolution form
+    evolutionData.chain.evolves_to.forEach( item => {
+      evolvesTo.push(item.species.name)
+    })
+    // return evolvesTo
+  } else {
+    for (i in evolutionData.chain.evolves_to) {
+      if (evolutionData.chain.evolves_to[i].species.name === pokemonName) {
+        evolutionData.chain.evolves_to[i].evolves_to.forEach( item => evolvesTo.push(item.species.name))
+        // return evolvesTo
+      }
+    }
+  }
+  pokeEvolveTo.replaceChildren();
+  evolvesTo.forEach( evo => {
+    li = document.createElement('li')
+    li.textContent = toCapitalCase(evo)
+    pokeEvolveTo.appendChild(li)
+  })
+}
 
 
 function updateDom(data) {
@@ -32,18 +82,22 @@ function updateDom(data) {
       pokeType2Image.src = ''
     }
 
-
     // Update info
     query.value = '';
     pokeName.innerText = toCapitalCase(data.name);
     pokeId.innerText = `# ${('000'+data.id).slice(-4)}`;
     pokeHeight.innerText = +data.height / 10; //in metres
     pokeWeight.innerText = +data.weight / 10; //in kg
+
+    //Stats
     [pokeStatHp, pokeStatAtk, pokeStatDef, pokeStatSpAtk, pokeStatSpDef, pokeStatSpeed].forEach( (item, i) => {
       item.innerText = fillDots(+data.stats[i].base_stat, ['hp', 'atk', 'def', 'spAtk', 'spDef', 'spd'][i])
     })
 
+    //Evolutions are updated in `checkEvolutionChain` and `fetchEvolutionChain`
+
     return true
+
   } else { // If invalid query
     // Erase image
     pokeImage.src = `images/model/0.png`
