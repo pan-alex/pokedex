@@ -33,13 +33,24 @@
 
 
       > .screenRight {
-        display: grid;
-        // grid-template-rows: 0.4fr 1fr;
+        // display: grid;
+        // grid-template-rows: 1fr 1fr;
 
         .screenRightTop {
           height: 40%;
+          overflow: auto;
+          scrollbar-width: thin;
+          scrollbar-width: 12px;
+          scrollbar-gutter: stable;
+          scrollbar-color: var(--screenaccent);   /* scroll thumb and track */
         }
+
+        .screenRightBot {
+          height: 60%;
+        }
+
       }
+
     }
 
     .screenBot {
