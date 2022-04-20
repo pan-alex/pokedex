@@ -17,8 +17,6 @@ function fetchPokemonData(){
         });
   }
 
-let evolvesTo = []
-let evolvesFrom // global variable; need to work out how to do this without a Global
 
 function fetchEvolution(pokemonData, pokemonName){
   const urlSpecies = pokemonData.species.url;
@@ -26,6 +24,7 @@ function fetchEvolution(pokemonData, pokemonName){
       .then(res => res.json()) // parse response as JSON
       .then(speciesData => {
         urlEvolution = speciesData.evolution_chain.url;
+        // Update evolved-from
         pokeEvolveFrom.innerText = toCapitalCase(speciesData.evolves_from_species?.name) ?? 'N/A'; //Update Dom within this function
         fetchEvolutionChain(urlEvolution, pokemonName)
       })
@@ -51,21 +50,27 @@ function checkEvolutionChain(evolutionData, pokemonName) {
     evolutionData.chain.evolves_to.forEach( item => {
       evolvesTo.push(item.species.name)
     })
-    // return evolvesTo
-  } else {
+  } else { // This if-else chain only works where there are 2 evolutions (3 total forms). I don't think there are any pokemon with more than 2 evolutions?
     for (i in evolutionData.chain.evolves_to) {
       if (evolutionData.chain.evolves_to[i].species.name === pokemonName) {
         evolutionData.chain.evolves_to[i].evolves_to.forEach( item => evolvesTo.push(item.species.name))
-        // return evolvesTo
       }
     }
   }
+  // Update evolved-to
   pokeEvolveTo.replaceChildren();
-  evolvesTo.forEach( evo => {
+  if (evolvesTo[0]) {
+    evolvesTo.forEach( evo => {
+      li = document.createElement('li')
+      li.textContent = toCapitalCase(evo)
+      pokeEvolveTo.appendChild(li)
+    })
+  } else {
     li = document.createElement('li')
-    li.textContent = toCapitalCase(evo)
+    li.textContent = 'N/A'
     pokeEvolveTo.appendChild(li)
-  })
+  }
+
 }
 
 
