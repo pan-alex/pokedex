@@ -1,6 +1,7 @@
 document.querySelector('#submitQuery').addEventListener('click', fetchPokemonData)
 document.querySelector('#clearQuery').addEventListener('click', function() {query.value = ''})
 
+
 function fetchPokemonData(){
     const pokemonName = query.value.trim().replace(/ /g, '-').toLowerCase()
     const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName
@@ -127,7 +128,7 @@ maxStats = {
 }
 
 '◐'
-return ('●'.repeat(value*10 / maxStats[stat]) + '○○○○○○○○○○').slice(0, 10)
+return ('●'.repeat(Math.round(value*10 / maxStats[stat])) + '○○○○○○○○○○').slice(0, 10)
 }
 
 
