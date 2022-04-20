@@ -20,14 +20,11 @@ function fetchPokemonData(){
 
 
 function fetchEvolution(pokemonData, pokemonName){
-  const urlSpecies = pokemonData.species.url;
-  fetch(urlSpecies)
+  fetch(pokemonData.species.url)
       .then(res => res.json()) // parse response as JSON
       .then(speciesData => {
-        urlEvolution = speciesData.evolution_chain.url;
-        // Update evolved-from
-        pokeEvolveFrom.innerText = toCapitalCase(speciesData.evolves_from_species?.name) ?? 'N/A'; //Update Dom within this function
-        fetchEvolutionChain(urlEvolution, pokemonName)
+        updateDomEvolvesFrom(speciesData)
+        fetchEvolutionChain(speciesData.evolution_chain.url, pokemonName)
       })
       .catch(err => {
         updateDom()
@@ -58,6 +55,15 @@ function checkEvolutionChain(evolutionData, pokemonName) {
       }
     }
   }
+  updateDomEvolvesTo(evolvesTo)
+}
+
+
+function updateDomEvolvesFrom(speciesData) {
+  pokeEvolveFrom.innerText = toCapitalCase(speciesData.evolves_from_species?.name) ?? 'N/A'; //Update Dom within this function
+}
+
+function updateDomEvolvesTo(evolvesTo) {
   // Update evolved-to
   pokeEvolveTo.replaceChildren();
   if (evolvesTo[0]) {
@@ -71,9 +77,7 @@ function checkEvolutionChain(evolutionData, pokemonName) {
     li.textContent = 'N/A'
     pokeEvolveTo.appendChild(li)
   }
-
 }
-
 
 function updateDom(data) {
 
