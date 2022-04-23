@@ -1,12 +1,7 @@
 
 #wrapper {
-    max-height: 100vh;
-    height: var(--panelHeight);
-    min-height: var(--panelMinHeight);
-    min-width: var(--panelMinWidth);
-    width: 100%;
-    max-width: var(--panelMaxWidth);
     display: grid;
+    width: 100%;
   }
 
 
@@ -18,22 +13,71 @@
 }
 
 .panel {
-  display: flex;
-  flex-direction: column;
   background: var(--pokered);
   border: 2px solid black;
   border-radius: 0;
+  height: 100vh;
+  max-height: var(--panelMaxHeight);
+  min-height: var(--panelMinHeight);
+  max-width: var(--panelMaxWidth);
+  min-width: var(--panelMinWidth);
   }
+
+  // Sizes
+.screenFrame {
+  margin: 2.5vh;
+  height: 80vh; //80% of panel
+  max-height: calc(var(--panelMaxHeight) * 0.8);
+  min-height: calc(var(--panelMinHeight) * 0.8);
+
+  .mainDisplay {
+    position: absolute;
+    inset: 5vh 3%;
+    height: 70vh; // 70% of panel (+10vh offsets). Sits inside .screenFrame.
+    max-height: calc(var(--panelMaxHeight) * 0.70);
+    min-height: calc(var(--panelMinHeight) * 0.70);
+
+    .screenMain {
+      height: calc(70vh * 0.8); //80% of main display
+      max-height: calc(var(--panelMaxHeight) * 0.70 * 0.8);
+      min-height: calc(var(--panelMinHeight) * 0.70 * 0.8);
+
+      > .screenRight {
+
+        .screenRightTop {
+            height: calc(70vh * 0.8 * 0.4); //40% of screenMain
+            max-height: calc(var(--panelMaxHeight) * 0.70 * 0.8 * 0.4);
+            min-height: calc(var(--panelMinHeight) * 0.70 * 0.8 * 0.4);
+        }
+
+        .screenRightBot {
+          height: calc(70vh * 0.8 * 0.6); //60% of screenMain
+          max-height: calc(var(--panelMaxHeight) * 0.70 * 0.8 * 0.6);
+          min-height: calc(var(--panelMinHeight) * 0.70 * 0.8 * 0.6);
+        }
+      }
+    }
+    .screenBot {
+      height: calc(70vh * 0.2); //20% of main display
+      max-height: calc(var(--panelMaxHeight) * 0.70 * 0.2);
+      min-height: calc(var(--panelMinHeight) * 0.70 * 0.2);
+    }
+  }
+}
+
+.panelBottom {
+  height: calc(20vh); // 20% of panel
+  max-height: calc(var(--panelMaxHeight) * 0.2);
+  min-height: calc(var(--panelMinHeight) * 0.2);
+}
 
 
   .buttonRow .screen {
     margin-top: 10px;
   }
 
-
 @media screen and (min-width: 1100px) {
   .panel {
     border-radius: 25px;
   }
-
 }

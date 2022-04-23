@@ -1,27 +1,23 @@
 .screenFrame {
     position: relative;
-    height: 80%;
-    margin: 2.5%;
+    // margin: 2.5%;
     border: 2px solid black;
     border-radius: 15px;
     background: rgb(238, 238, 238);
   }
 
-
 .mainDisplay {
-    position: absolute;
-    inset: 5% 3%;
 
     .screenMain {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      height: 80%;
 
 
       > .screenLeft {
+        height: 100%;
         display: grid;
         // max-height: 100%;
-        grid-template-rows: 0.7fr 0.3fr;
+        // grid-template-rows: 0.7fr 0.3fr;
 
         > .imgHolder {
           position: relative;
@@ -33,11 +29,11 @@
 
 
       > .screenRight {
-        // display: grid;
-        // grid-template-rows: 1fr 1fr;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 0.3fr 0.7fr;
 
         .screenRightTop {
-          height: 40%;
           overflow: auto;
           scrollbar-width: thin;
           scrollbar-width: 12px;
@@ -46,7 +42,11 @@
         }
 
         .screenRightBot {
-          height: 60%;
+          overflow: auto;
+          scrollbar-width: thin;
+          scrollbar-width: 12px;
+          scrollbar-gutter: stable;
+          scrollbar-color: var(--screenaccent);   /* scroll thumb and track */
         }
 
       }
@@ -56,8 +56,8 @@
     .screenBot {
       display: flex;
       align-items: center;
-      height: 20%;
       position: relative;
+      padding: 2px;
     }
 }
 

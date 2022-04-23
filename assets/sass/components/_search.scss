@@ -11,12 +11,11 @@
 // }
 
 #query {
-  // position: absolute;
-  // top: 20%;
+  position: absolute;
   display: block;
   border: none;
   border-radius: 5px;
-  height: 90%;
+  height: 75%;
   background: var(--screenbg);
   filter: brightness(200%);
 
