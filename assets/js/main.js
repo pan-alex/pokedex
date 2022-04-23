@@ -3,6 +3,17 @@ fetchAllPokemon('https://pokeapi.co/api/v2/pokemon?limit=2000')
 
 document.querySelector('#submitQuery').addEventListener('click', fetchPokemonData)
 document.querySelector('#clearQuery').addEventListener('click', function() {query.value = ''})
+document.addEventListener('click', clickPokemonName)
+
+// Event listener function that  allows you to click on a pokemon name
+function clickPokemonName(e) {
+  if (e.target.tagName === 'LI') {
+    let liText = e.target.textContent
+    let pokemonName = /[0-9]/.test(liText[0]) ? liText.slice(5) : liText
+    pokemonName = toDashSeparated(pokemonName)
+    fetchPokemonData(e, pokemonName)
+  }
+}
 
 
 // Fetch & Display the list of all pokemon. Execute on page-load
@@ -31,32 +42,32 @@ function updateDomPokeList(pokemon) {
 
 
 // Fetch pokemon data on event.
-function fetchPokemonData(){
-    // Fetches pokemon data from pokemon API and updates DOM with information.
-    // Evolution data are from the species API and evolution chain APIs. These are wrapped inside
-    // this function. The inner functions also update the DOM with the information.
+function fetchPokemonData(e, pokemonName){
+  // This is the main wrapper function that fetches data & updates the DOM on event.
+  // Fetches pokemon data from pokemon API and updates DOM with information.
+  // Evolution data are from the species API and evolution chain APIs. These are wrapped inside
+  // this function. The inner functions also update the DOM with the information.
 
-    // Structure:
-    // fetchPokemonData()
-    //     fetchEvolution()
-    //         fetchEvolutionChain() --> updates DOM with evolvesFrom pokemon
-    //         checkEvolutionChain() --> updates DOM with evolvesTo pokemon
-    //     -> Update DOM with other pokemon info
+  // Structure:
+  // fetchPokemonData()
+  //     fetchEvolution()
+  //         fetchEvolutionChain() --> updates DOM with evolvesFrom pokemon
+  //         checkEvolutionChain() --> updates DOM with evolvesTo pokemon
+  //     -> Update DOM with other pokemon info
+  pokemonName = pokemonName ?? toDashSeparated(query.value)
+  const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName
 
-    const pokemonName = query.value.trim().replace(/ /g, '-').toLowerCase()
-    const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName
-
-    fetch(url)
-        .then(res => res.json()) // parse response as JSON
-        .then(pokemonData => {
-          fetchEvolution(pokemonData, pokemonName);
-          updateDomInfo(pokemonData);
-        })
-        .catch(err => {
-          updateDomInfo()
-          console.log(`error ${err}`)
-        });
-  }
+  fetch(url)
+      .then(res => res.json()) // parse response as JSON
+      .then(pokemonData => {
+        fetchEvolution(pokemonData, pokemonName);
+        updateDomInfo(pokemonData);
+      })
+      .catch(err => {
+        updateDomInfo()
+        console.log(`error ${err}`)
+      });
+}
 
 
 function fetchEvolution(pokemonData, pokemonName){
@@ -183,3 +194,6 @@ function toCapitalCase(word) {
     }
   }
 
+function toDashSeparated(word) {
+  return word.trim().replace(/ /g, '-').toLowerCase()
+}
