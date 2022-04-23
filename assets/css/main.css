@@ -1,12 +1,17 @@
 :root {
   --panelMinHeight: 320px;
-  --panelHeight: 800px;
+  --panelMaxHeight: 800px;
   --panelMinWidth: 300px;
   --panelMaxWidth: 1100px;
+  --screenMaxHeight: 700px;
+  --fontPrim: #c1c1c1;
+  --fontAccent: #35cf9c;
   --pokered: rgb(232, 72, 72);
-  --screenbg: #7fffd4;
-  --screenbggrid: black;
-  --screenglare: rgba(122, 230, 192, 0.836);
+  --screenbg: #272727;
+  --screenbggrid: white;
+  --screenaccent: hsl(160, 100%, 40%);
+  --screenglare: hsla(160, 70%, 25%, 0.85);
+  --screenglare2: hsl(160, 100%, 25%);
 }
 
 html, body, div, span, applet, object,
@@ -74,7 +79,6 @@ input, select, textarea {
 }
 
 body {
-  max-height: 100vh;
   width: 100%;
   display: grid;
   place-items: center;
@@ -82,6 +86,12 @@ body {
 
 body {
   font-family: "Courier New", Courier, monospace;
+  color: var(--fontPrim);
+}
+
+input {
+  font-family: "Courier New", Courier, monospace;
+  color: var(--fontPrim);
 }
 
 @media (max-width: 500px) {
@@ -93,7 +103,7 @@ body {
   position: relative;
   min-height: 50px;
   border: 2px solid black;
-  background-color: white;
+  background-color: var(--screenbg);
 }
 
 .screen::before {
@@ -102,7 +112,7 @@ body {
   inset: 0;
   display: block;
   opacity: 0.25;
-  background-image: linear-gradient(135deg, var(--screenglare) 25%, transparent 25%), linear-gradient(225deg, var(--screenglare) 25%, transparent 25%), linear-gradient(45deg, var(--screenglare) 25%, transparent 25%), linear-gradient(315deg, var(--screenglare) 25%, var(--screenbg) 25%);
+  background-image: linear-gradient(135deg, var(--screenglare) 25%, rgba(0, 0, 0, 0) 25%), linear-gradient(225deg, var(--screenglare) 25%, rgba(0, 0, 0, 0) 25%), linear-gradient(45deg, var(--screenglare) 25%, rgba(0, 0, 0, 0) 25%), linear-gradient(315deg, var(--screenglare) 25%, var(--screenglare2) 25%);
   background-position: 10px 0, 10px 0, 0 0, 0 0;
   background-size: 10px 10px;
   background-repeat: repeat;
@@ -116,7 +126,7 @@ body {
   inset: 0;
   display: block;
   opacity: 0.1;
-  background-image: linear-gradient(var(--screenbggrid) 1px, transparent 1px), linear-gradient(90deg, var(--screenbggrid) 1px, white 1px);
+  background-image: linear-gradient(var(--screenbggrid) 1px, transparent 1px), linear-gradient(90deg, var(--screenbggrid) 1px, var(--screenbg) 1px);
   background-size: 10px 10px, 10px 10px;
   background-position: 1px 1px, 1px 1px;
   z-index: 2;
@@ -145,13 +155,43 @@ img.type {
   position: relative;
   height: 10vh;
   max-height: 62px;
+  filter: brightness(80%);
 }
 img.type + img {
   padding-left: 5px;
 }
 
-#pokeStatHp {
-  color: purple;
+.screenRightTop td + td {
+  padding-left: 0.5rem;
+}
+.screenRightTop #pokeStatHp {
+  color: hsl(300deg, 57%, 60%);
+}
+.screenRightTop #pokeStatAtk {
+  color: hsl(5deg, 66%, 57%);
+}
+.screenRightTop #pokeStatDef {
+  color: hsl(39deg, 97%, 50%);
+}
+.screenRightTop #pokeStatSpAtk {
+  color: hsl(197deg, 100%, 50%);
+}
+.screenRightTop #pokeStatSpDef {
+  color: hsl(120deg, 54%, 50%);
+}
+.screenRightTop #pokeStatSpeed {
+  color: hsl(350deg, 100%, 88%);
+}
+
+li {
+  padding: 1px;
+  cursor: pointer;
+}
+
+li:hover {
+  border: 1px solid var(--fontAccent);
+  padding: 0;
+  color: var(--fontAccent);
 }
 
 button {
@@ -185,11 +225,13 @@ button.red {
 }
 
 #query {
-  font-family: "Courier New", Courier, monospace;
+  position: absolute;
   display: block;
   border: none;
   border-radius: 5px;
-  height: 90%;
+  height: 75%;
+  background: var(--screenbg);
+  filter: brightness(200%);
 }
 #query:focus {
   outline: none;
@@ -197,13 +239,8 @@ button.red {
 }
 
 #wrapper {
-  max-height: 100vh;
-  height: var(--panelHeight);
-  min-height: var(--panelMinHeight);
-  min-width: var(--panelMinWidth);
-  width: 100%;
-  max-width: var(--panelMaxWidth);
   display: grid;
+  width: 100%;
 }
 
 .flex-rl {
@@ -214,11 +251,54 @@ button.red {
 }
 
 .panel {
-  display: flex;
-  flex-direction: column;
   background: var(--pokered);
   border: 2px solid black;
   border-radius: 0;
+  height: 100vh;
+  max-height: var(--panelMaxHeight);
+  min-height: var(--panelMinHeight);
+  max-width: var(--panelMaxWidth);
+  min-width: var(--panelMinWidth);
+}
+
+.screenFrame {
+  margin: 2.5vh;
+  height: 80vh;
+  max-height: calc(var(--panelMaxHeight) * 0.8);
+  min-height: calc(var(--panelMinHeight) * 0.8);
+}
+.screenFrame .mainDisplay {
+  position: absolute;
+  inset: 5vh 3%;
+  height: 70vh;
+  max-height: calc(var(--panelMaxHeight) * 0.7);
+  min-height: calc(var(--panelMinHeight) * 0.7);
+}
+.screenFrame .mainDisplay .screenMain {
+  height: 56vh;
+  max-height: calc(var(--panelMaxHeight) * 0.7 * 0.8);
+  min-height: calc(var(--panelMinHeight) * 0.7 * 0.8);
+}
+.screenFrame .mainDisplay .screenMain > .screenRight .screenRightTop {
+  height: 22.4vh;
+  max-height: calc(var(--panelMaxHeight) * 0.7 * 0.8 * 0.4);
+  min-height: calc(var(--panelMinHeight) * 0.7 * 0.8 * 0.4);
+}
+.screenFrame .mainDisplay .screenMain > .screenRight .screenRightBot {
+  height: 33.6vh;
+  max-height: calc(var(--panelMaxHeight) * 0.7 * 0.8 * 0.6);
+  min-height: calc(var(--panelMinHeight) * 0.7 * 0.8 * 0.6);
+}
+.screenFrame .mainDisplay .screenBot {
+  height: 14vh;
+  max-height: calc(var(--panelMaxHeight) * 0.7 * 0.2);
+  min-height: calc(var(--panelMinHeight) * 0.7 * 0.2);
+}
+
+.panelBottom {
+  height: 20vh;
+  max-height: calc(var(--panelMaxHeight) * 0.2);
+  min-height: calc(var(--panelMinHeight) * 0.2);
 }
 
 .buttonRow .screen {
@@ -232,25 +312,18 @@ button.red {
 }
 .screenFrame {
   position: relative;
-  height: 80%;
-  margin: 2.5%;
   border: 2px solid black;
   border-radius: 15px;
   background: rgb(238, 238, 238);
 }
 
-.mainDisplay {
-  position: absolute;
-  inset: 5% 3%;
-}
 .mainDisplay .screenMain {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 80%;
 }
 .mainDisplay .screenMain > .screenLeft {
+  height: 100%;
   display: grid;
-  grid-template-rows: 0.7fr 0.3fr;
 }
 .mainDisplay .screenMain > .screenLeft > .imgHolder {
   position: relative;
@@ -258,16 +331,31 @@ button.red {
   place-items: center;
 }
 .mainDisplay .screenMain > .screenRight {
+  height: 100%;
   display: grid;
+  grid-template-rows: 0.3fr 0.7fr;
 }
 .mainDisplay .screenMain > .screenRight .screenRightTop {
-  height: 40%;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-width: 12px;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--screenaccent);
+  /* scroll thumb and track */
+}
+.mainDisplay .screenMain > .screenRight .screenRightBot {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-width: 12px;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--screenaccent);
+  /* scroll thumb and track */
 }
 .mainDisplay .screenBot {
   display: flex;
   align-items: center;
-  height: 20%;
   position: relative;
+  padding: 2px;
 }
 
 .screenMain .screenLeft {
