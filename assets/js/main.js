@@ -1,8 +1,48 @@
+// On page-load
+fetchAllPokemon('https://pokeapi.co/api/v2/pokemon?limit=2000')
+
 document.querySelector('#submitQuery').addEventListener('click', fetchPokemonData)
 document.querySelector('#clearQuery').addEventListener('click', function() {query.value = ''})
 
 
+// Fetch & Display the list of all pokemon. Execute on page-load
+function fetchAllPokemon(url) {
+  fetch(url)
+  .then(res => res.json()) // parse response as JSON
+  .then(pokemon => {
+    updateDomPokeList(pokemon)
+  })
+  .catch(err => {
+    updateDomInfo()
+    console.log(`error ${err}`)
+  });
+}
+
+
+function updateDomPokeList(pokemon) {
+  // Update evolved-to
+  pokeList.replaceChildren();
+  pokemon.results.forEach( (mon, id) => {
+      li = document.createElement('li')
+      li.textContent = `${('000'+id).slice(-4)} ${toCapitalCase(mon.name)}`
+      pokeList.appendChild(li)
+    })
+}
+
+
+// Fetch pokemon data on event.
 function fetchPokemonData(){
+    // Fetches pokemon data from pokemon API and updates DOM with information.
+    // Evolution data are from the species API and evolution chain APIs. These are wrapped inside
+    // this function. The inner functions also update the DOM with the information.
+
+    // Structure:
+    // fetchPokemonData()
+    //     fetchEvolution()
+    //         fetchEvolutionChain() --> updates DOM with evolvesFrom pokemon
+    //         checkEvolutionChain() --> updates DOM with evolvesTo pokemon
+    //     -> Update DOM with other pokemon info
+
     const pokemonName = query.value.trim().replace(/ /g, '-').toLowerCase()
     const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName
 
@@ -10,10 +50,10 @@ function fetchPokemonData(){
         .then(res => res.json()) // parse response as JSON
         .then(pokemonData => {
           fetchEvolution(pokemonData, pokemonName);
-          updateDom(pokemonData);
+          updateDomInfo(pokemonData);
         })
         .catch(err => {
-          updateDom()
+          updateDomInfo()
           console.log(`error ${err}`)
         });
   }
@@ -63,6 +103,7 @@ function updateDomEvolvesFrom(speciesData) {
   pokeEvolveFrom.innerText = toCapitalCase(speciesData.evolves_from_species?.name) ?? 'N/A'; //Update Dom within this function
 }
 
+
 function updateDomEvolvesTo(evolvesTo) {
   // Update evolved-to
   pokeEvolveTo.replaceChildren();
@@ -79,7 +120,8 @@ function updateDomEvolvesTo(evolvesTo) {
   }
 }
 
-function updateDom(data) {
+
+function updateDomInfo(data) {
 
   if (data && data.name) { // If valid query (successfully returns and object & that object is a pokemon [with a name])
     // Update images
@@ -130,11 +172,8 @@ maxStats = {
   'spDef': 230,
   'spd': 180,
 }
-
-'◐'
 return ('●'.repeat(Math.round(value*10 / maxStats[stat])) + '○○○○○○○○○○').slice(0, 10)
 }
-
 
 
 function toCapitalCase(word) {
