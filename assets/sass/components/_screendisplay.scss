@@ -98,9 +98,7 @@
     position: relative;
 
     .battery {
-        position: absolute;
-        top: 5px;
-        right: 10px;
+        display: none;
     }
 
     td + td {
@@ -140,3 +138,13 @@ li:hover {
     color: var(--fontAccent);
 }
 
+@media (min-width: 500px) {
+    .screenRightTop {
+        .battery {
+            display: block;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+        }
+    }
+}

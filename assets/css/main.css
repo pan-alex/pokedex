@@ -99,7 +99,7 @@ input {
 }
 
 @media (max-width: 500px) {
-  a, p {
+  a, p, li {
     font-size: 0.8rem;
   }
 }
@@ -184,9 +184,7 @@ img.type + img {
   position: relative;
 }
 .screenRightTop .battery {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+  display: none;
 }
 .screenRightTop td + td {
   padding-left: 0.5rem;
@@ -221,6 +219,14 @@ li:hover {
   color: var(--fontAccent);
 }
 
+@media (min-width: 500px) {
+  .screenRightTop .battery {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+}
 button {
   background-color: grey;
   width: 45px;
