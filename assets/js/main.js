@@ -3,6 +3,7 @@ fetchAllPokemon('https://pokeapi.co/api/v2/pokemon?limit=2000')
 
 document.querySelector('#submitQuery').addEventListener('click', fetchPokemonData)
 document.querySelector('#clearQuery').addEventListener('click', function() {query.value = ''})
+document.querySelector('#search').addEventListener('click', function() {query.focus()})
 document.addEventListener('click', clickPokemonName)
 
 // Event listener function that  allows you to click on a pokemon name

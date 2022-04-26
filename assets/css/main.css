@@ -78,6 +78,10 @@ input, select, textarea {
   appearance: none;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   width: 100%;
   display: grid;
@@ -118,6 +122,21 @@ input {
   background-repeat: repeat;
   pointer-events: none;
   z-index: 4;
+}
+
+.screenMain .screenLeft {
+  border-right: 1px solid black;
+  border-bottom: 2px solid black;
+}
+.screenMain .screenLeft .imgHolder {
+  border-bottom: 1px solid black;
+}
+.screenMain .screenRight {
+  border-left: 1px solid black;
+  border-bottom: 2px solid black;
+}
+.screenMain .screenRight .screenRightTop {
+  border-bottom: 1px solid black;
 }
 
 .imgHolder::before {
@@ -161,6 +180,14 @@ img.type + img {
   padding-left: 5px;
 }
 
+.screenRightTop {
+  position: relative;
+}
+.screenRightTop .battery {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
 .screenRightTop td + td {
   padding-left: 0.5rem;
 }
@@ -198,7 +225,6 @@ button {
   background-color: grey;
   width: 45px;
   border: 1px solid black;
-  /* opacity: 0.5; */
 }
 
 button:hover {
@@ -211,11 +237,6 @@ button.circular {
   border-radius: 50%;
 }
 
-button.thin {
-  height: 20px;
-  border-radius: 5px;
-}
-
 button.blue {
   background-color: cornflowerblue;
 }
@@ -224,6 +245,12 @@ button.red {
   background-color: darkred;
 }
 
+@media (max-height: 500px), (max-width: 500px) {
+  button.circular {
+    width: 35px;
+    height: 35px;
+  }
+}
 #query {
   position: absolute;
   display: block;
@@ -263,13 +290,15 @@ button.red {
 
 .screenFrame {
   margin: 2.5vh;
+  margin-bottom: 0;
   height: 80vh;
   max-height: calc(var(--panelMaxHeight) * 0.8);
   min-height: calc(var(--panelMinHeight) * 0.8);
+  display: grid;
+  place-items: center;
 }
 .screenFrame .mainDisplay {
-  position: absolute;
-  inset: 5vh 3%;
+  width: 92%;
   height: 70vh;
   max-height: calc(var(--panelMaxHeight) * 0.7);
   min-height: calc(var(--panelMinHeight) * 0.7);
@@ -356,21 +385,6 @@ button.red {
   align-items: center;
   position: relative;
   padding: 2px;
-}
-
-.screenMain .screenLeft {
-  border-right: 1px solid black;
-  border-bottom: 2px solid black;
-}
-.screenMain .screenLeft .imgHolder {
-  border-bottom: 1px solid green;
-}
-.screenMain .screenRight {
-  border-left: 1px solid black;
-  border-bottom: 2px solid black;
-}
-.screenMain .screenRight .screenRightTop {
-  border-bottom: 1px solid blue;
 }
 
 @media only screen and (max-width: 500px) and (orientation: portrait) {

@@ -3,7 +3,6 @@ button {
     background-color: grey;
     width: 45px;
     border: 1px solid black;
-    /* opacity: 0.5; */
   }
 
   button:hover {
@@ -16,10 +15,10 @@ button {
     border-radius: 50%;
   }
 
-  button.thin {
-    height: 20px;
-    border-radius: 5px;
-  }
+  // button.thin {
+  //   height: 20px;
+  //   border-radius: 5px;
+  // }
 
   button.blue {
     background-color: cornflowerblue;
@@ -29,6 +28,9 @@ button {
     background-color: darkred;
   }
 
-  // button.dpad {
-
-  // }
+  @media (max-height: 500px), (max-width: 500px) {
+    button.circular {
+      width: 35px;
+      height: 35px;
+    }
+  }

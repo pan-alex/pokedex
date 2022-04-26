@@ -95,6 +95,14 @@
 }
 
 .screenRightTop {
+    position: relative;
+
+    .battery {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+
     td + td {
         padding-left: 0.5rem;
     }
