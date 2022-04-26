@@ -26,13 +26,15 @@
   // Sizes
 .screenFrame {
   margin: 2.5vh;
+  margin-bottom: 0;
   height: 80vh; //80% of panel
   max-height: calc(var(--panelMaxHeight) * 0.8);
   min-height: calc(var(--panelMinHeight) * 0.8);
+  display: grid;
+  place-items: center;
 
   .mainDisplay {
-    position: absolute;
-    inset: 5vh 3%;
+    width: 92%;
     height: 70vh; // 70% of panel (+10vh offsets). Sits inside .screenFrame.
     max-height: calc(var(--panelMaxHeight) * 0.70);
     min-height: calc(var(--panelMinHeight) * 0.70);
