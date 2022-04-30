@@ -83,12 +83,6 @@ input, select, textarea {
 }
 
 body {
-  width: 100%;
-  display: grid;
-  place-items: center;
-}
-
-body {
   font-family: "Courier New", Courier, monospace;
   color: var(--fontPrim);
 }
@@ -271,11 +265,6 @@ button.red {
   background: rgba(128, 128, 128, 0.3);
 }
 
-#wrapper {
-  display: grid;
-  width: 100%;
-}
-
 .flex-rl {
   display: flex;
   justify-content: space-between;
@@ -284,6 +273,7 @@ button.red {
 }
 
 .panel {
+  margin: 0 auto;
   background: var(--pokered);
   border: 2px solid black;
   border-radius: 0;
